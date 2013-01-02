@@ -44,7 +44,9 @@ def main() :
     # Download more themes...
     elif download_mode == 0 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/backgrounds/"
-        ZIP_PATH = SKIN_PATH
+        ZIP_PATH = os.path.join( SKIN_PATH, "backgroundpacks" )
+        if not os.path.exists(ZIP_PATH):
+            os.makedirs(ZIP_PATH)
         INSTALL_PATH  = os.path.join( SKIN_PATH, "backgrounds" )
         themes = get_local_backgroundpacks()
         themes.append( __language__(32001) )
