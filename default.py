@@ -36,6 +36,7 @@ def main() :
     modeselect.append( __language__(32016) )
     modeselect.append( __language__(32019) )
     modeselect.append( __language__(32018) )
+    modeselect.append( __language__(32024) )
     dialogSelection = xbmcgui.Dialog()
     download_mode        = dialogSelection.select( __language__(32010), modeselect ) 
     if download_mode == -1 :
@@ -92,6 +93,12 @@ def main() :
             os.makedirs(ZIP_PATH)
         themes = get_local_backgroundpacks()
         themes.append( __language__(32021) )
+    elif download_mode == 7 :
+        BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/Mods/"
+        DOWNLOAD_PATH  = SKIN_PATH
+        ZIP_PATH = DOWNLOAD_PATH
+        themes = get_local_backgroundpacks()
+        themes.append( __language__(32025) )
  #   if len(sys.argv) == 2 and sys.argv[ 1 ].startswith("http://") :
  #       BACKGROUNDPACKS_REPO = sys.argv[ 1 ]
     # Get a list of local themes...
@@ -183,6 +190,9 @@ def install_local_backgroundpack( theme ) :
         zip = zipfile.ZipFile (backgroundpackZip, "r")
         zip.extractall(DOWNLOAD_PATH, filter(lambda f: not f.endswith('/'), zip.namelist()))
         zip.close()   
+        if download_mode == 4 :
+            xbmcgui.Dialog().ok( __addonid__, Skin will reload now.)        
+            xbmc.executebuiltin( 'XBMC.ReloadSkin()')
         xbmcgui.Dialog().ok( __addonid__, __language__(32003))        
     except :
         # Message...
