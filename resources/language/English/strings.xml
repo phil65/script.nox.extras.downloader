@@ -11,10 +11,16 @@
 	<string id="32009">Themes</string>
 	<string id="32010">What do you want to download?</string>
 	<string id="32011">Download more zips</string>
-	<string id="32012">Download Genre Icons</string>
-	<string id="32013">Genre Icons</string>
+	<string id="32012">Download Video Genre Icons</string>
+	<string id="32013">Video Genre Icons</string>
 	<string id="32014">Download Genre Fanart</string>
-	<string id="32015">Genre Fanart</string>
+	<string id="32015">Video Genre Fanart</string>
 	<string id="32016">Conditional Weather Fanart</string>
 	<string id="32017">Download Conditional Weather Fanart</string>
+	<string id="32018">Music Genre Fanart</string>
+	<string id="32019">Music Genre Icons</string>
+	<string id="32020">Download Music Genre Icons</string>
+	<string id="32021">Download Music Genre Fanart</string>
+	<string id="32022">Year Icons</string>
+	<string id="32023">Year Fanart</string>
 </strings>
