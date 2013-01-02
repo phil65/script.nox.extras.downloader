@@ -23,7 +23,7 @@ def main() :
   #  BACKGROUNDPACKS_REPO = None
     global ZIP_PATH
     global BACKGROUNDPACKS_REPO
-    global SKIN_BG_PATH
+    global DOWNLOAD_PATH
     global download_mode
     modeselect= []
     modeselect.append( __language__(32008) )
@@ -41,50 +41,50 @@ def main() :
     elif download_mode == 0 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/backgrounds/"
         ZIP_PATH = SKIN_PATH
-        SKIN_BG_PATH  = os.path.join( SKIN_PATH, "backgrounds" )
+        DOWNLOAD_PATH  = os.path.join( SKIN_PATH, "backgrounds" )
         themes = get_local_backgroundpacks()
         themes.append( __language__(32001) )
         # Install local theme...
     elif download_mode == 1 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/themes/"
-        SKIN_BG_PATH  = os.path.join( SKIN_PATH, "media" )
-        ZIP_PATH = os.path.join( SKIN_PATH, "media" )
+        DOWNLOAD_PATH  = os.path.join( SKIN_PATH, "media" )
+        ZIP_PATH = DOWNLOAD_PATH
         themes = get_local_backgroundpacks()
         themes.append( __language__(32011) )
     elif download_mode == 2 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/genreart/icons/"
-        SKIN_BG_PATH  = os.path.join( SKIN_PATH, "extras", "genre", "video", "icons" )
-        ZIP_PATH = os.path.join( SKIN_PATH, "extras", "genre", "video", "icons" )
+        DOWNLOAD_PATH  = os.path.join( SKIN_PATH, "extras", "genre", "video", "icons" )
+        ZIP_PATH = DOWNLOAD_PATH
         if not os.path.exists(ZIP_PATH):
             os.makedirs(ZIP_PATH)
         themes = get_local_backgroundpacks()
         themes.append( __language__(32012) )
     elif download_mode == 3 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/genreart/fanart/"
-        SKIN_BG_PATH  = os.path.join( SKIN_PATH, "extras", "genre", "video", "fanart" )
-        ZIP_PATH = os.path.join( SKIN_PATH, "extras", "genre", "video", "fanart" )
+        DOWNLOAD_PATH  = os.path.join( SKIN_PATH, "extras", "genre", "video", "fanart" )
+        ZIP_PATH = DOWNLOAD_PATH
         if not os.path.exists(ZIP_PATH):
             os.makedirs(ZIP_PATH)
         themes = get_local_backgroundpacks()
         themes.append( __language__(32014) )
     elif download_mode == 4 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/weather-fanart/"
-        SKIN_BG_PATH  = os.path.join( SKIN_PATH, "extras" )
+        DOWNLOAD_PATH  = os.path.join( SKIN_PATH, "extras" )
         ZIP_PATH = SKIN_PATH
         themes = get_local_backgroundpacks()
         themes.append( __language__(32017) )
     elif download_mode == 5 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/Music/icons/"
-        SKIN_BG_PATH  = os.path.join( SKIN_PATH, "extras", "genre", "music", "icons" )
-        ZIP_PATH = os.path.join( SKIN_PATH, "extras", "genre", "music", "icons" )
+        DOWNLOAD_PATH  = os.path.join( SKIN_PATH, "extras", "genre", "music", "icons" )
+        ZIP_PATH = DOWNLOAD_PATH
         if not os.path.exists(ZIP_PATH):
             os.makedirs(ZIP_PATH)
         themes = get_local_backgroundpacks()
         themes.append( __language__(32020) )
     elif download_mode == 6 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/Music/fanart/"
-        SKIN_BG_PATH  = os.path.join( SKIN_PATH, "extras", "genre", "music", "fanart" )
-        ZIP_PATH = os.path.join( SKIN_PATH, "extras", "genre", "music", "fanart" )
+        DOWNLOAD_PATH  = os.path.join( SKIN_PATH, "extras", "genre", "music", "fanart" )
+        ZIP_PATH = DOWNLOAD_PATH
         if not os.path.exists(ZIP_PATH):
             os.makedirs(ZIP_PATH)
         themes = get_local_backgroundpacks()
@@ -167,18 +167,18 @@ def download_progress_hook( numblocks, blocksize, filesize, url=None, dp=None, r
 def install_local_backgroundpack( theme ) :
     try :
         # Init
-     #   shutil.rmtree(SKIN_BG_PATH)
+     #   shutil.rmtree(DOWNLOAD_PATH)
         if download_mode == 0 :
-            contents = [os.path.join(SKIN_BG_PATH, i) for i in os.listdir(SKIN_BG_PATH)]
+            contents = [os.path.join(DOWNLOAD_PATH, i) for i in os.listdir(DOWNLOAD_PATH)]
             [shutil.rmtree(i) if os.path.isdir(i) else os.unlink(i) for i in contents]
         if download_mode == 4 :
             xbmc.executebuiltin( 'Skin.SetString(WeatherFanartDir,special://skin/extras/Weather-Fanart/)')
-            contents = [os.path.join(SKIN_BG_PATH, "Weather-Fanart", i) for i in os.listdir(os.path.join(SKIN_BG_PATH, "Weather-Fanart"))]
+            contents = [os.path.join(DOWNLOAD_PATH, "Weather-Fanart", i) for i in os.listdir(os.path.join(DOWNLOAD_PATH, "Weather-Fanart"))]
             [shutil.rmtree(i) if os.path.isdir(i) else os.unlink(i) for i in contents]
         backgroundpackZip = os.path.join( ZIP_PATH, "%s.zip" % theme )
         # Extract theme zip...
         zip = zipfile.ZipFile (backgroundpackZip, "r")
-        zip.extractall(SKIN_BG_PATH, filter(lambda f: not f.endswith('/'), zip.namelist()))
+        zip.extractall(DOWNLOAD_PATH, filter(lambda f: not f.endswith('/'), zip.namelist()))
         zip.close()   
         xbmcgui.Dialog().ok( __addonid__, __language__(32003))        
     except :
