@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <strings>
 	<string id="32001">Download more background packs</string>
-	<string id="32002">List of background packs</string>
+	<string id="32002">List of zip files</string>
 	<string id="32003">Zip extracted successfully</string>
 	<string id="32004">Error when installing zip</string>
 	<string id="32005">Downloading background pack...</string>
-	<string id="32006">Choose background pack to download</string>
+	<string id="32006">Choose zip to download</string>
 	<string id="32007">No remote themes found</string>
 	<string id="32008">Background Packs</string>
 	<string id="32009">Themes</string>
 	<string id="32010">What do you want to download?</string>
-	<string id="32011">Download more themes</string>
-	<string id="32012">Install Theme</string>
+	<string id="32011">Download more zips</string>
+	<string id="32012">Download Genre Icons</string>
+	<string id="32013">Genre Icons</string>
+	<string id="32014">Download Genre Fanart</string>
+	<string id="32015">Genre Fanart</string>
+	<string id="32016">Conditional Weather Fanart</string>
+	<string id="32017">Download Conditional Weather Fanart</string>
 </strings>
