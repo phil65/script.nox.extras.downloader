@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<strings>
+	<string id="32001">Download more background packs</string>
+	<string id="32002">List of background packs</string>
+	<string id="32003">Background pack downloaded successfully</string>
+	<string id="32004">Error when downloading background pack</string>
+	<string id="32005">Downloading background pack...</string>
+	<string id="32006">Choose background pack to download</string>
+	<string id="32007">No remote themes found</string>
+	<string id="32008">Background Packs</string>
+	<string id="32009">Themes</string>
+	<string id="32010">What do you want to download?</string>
+	<string id="32011">Download more themes</string>
+</strings>

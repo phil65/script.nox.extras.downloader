@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="script.backgroundpack.downloader" name="BackgroundPack Downloader" version="0.0.1" provider-name="phil65">
+	<requires>
+		<import addon="xbmc.python" version="2.1.0"/>
+        <import addon="xbmc.addon"                  version="12.0.0"/>
+	</requires>
+    <extension point="xbmc.python.script"           library="default.py">
+        <provides>executable</provides>
+    </extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>BackgroundPack Downloader</summary>
+		<description>Downloads background packs from a specified URL</description>
+		<disclaimer>Needs skin support for it to be used properly</disclaimer>
+        <language></language>
+        <platform>all</platform>
+	</extension>
+</addon>
