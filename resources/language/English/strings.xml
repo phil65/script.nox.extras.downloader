@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <strings>
 	<string id="32001">Download more background packs</string>
-	<string id="32002">List of zip files</string>
+	<string id="32002">List of locally isntalled zip files</string>
 	<string id="32003">Zip extracted successfully</string>
 	<string id="32004">Error when installing zip</string>
 	<string id="32005">Downloading background pack...</string>
