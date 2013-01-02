@@ -105,6 +105,7 @@ def show_remote_themes( BACKGROUNDPACKS_REPO ) :
         theme = themes[ index ]
         # Show progress dialog...
         dp = xbmcgui.DialogProgress()
+        dp.create( __addonid__, __language__(32005), theme )
         # Download theme...
         remote_theme = os.path.join( BACKGROUNDPACKS_REPO, "%s.zip" % theme )
         local_theme  = os.path.join( ZIP_PATH, "%s.zip" % theme )
