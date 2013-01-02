@@ -105,7 +105,6 @@ def show_remote_themes( BACKGROUNDPACKS_REPO ) :
         theme = themes[ index ]
         # Show progress dialog...
         dp = xbmcgui.DialogProgress()
-        dp.create( __addonid__, __language__(32005), theme )
         # Download theme...
         remote_theme = os.path.join( BACKGROUNDPACKS_REPO, "%s.zip" % theme )
         local_theme  = os.path.join( ZIP_PATH, "%s.zip" % theme )
@@ -124,7 +123,6 @@ def install_local_backgroundpack( theme ) :
     try :
         # Init
      #   shutil.rmtree(SKIN_BG_PATH)
-        xbmcgui.Dialog().ok( __addonid__, "Install Theme")        
         if SKIN_BG_PATH  != os.path.join( SKIN_PATH, "media" ) :
             contents = [os.path.join(SKIN_BG_PATH, i) for i in os.listdir(SKIN_BG_PATH)]
             [shutil.rmtree(i) if os.path.isdir(i) else os.unlink(i) for i in contents]
