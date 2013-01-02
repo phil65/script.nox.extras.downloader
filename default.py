@@ -150,7 +150,7 @@ def install_local_backgroundpack( theme ) :
             contents = [os.path.join(SKIN_BG_PATH, i) for i in os.listdir(SKIN_BG_PATH)]
             [shutil.rmtree(i) if os.path.isdir(i) else os.unlink(i) for i in contents]
         if download_mode == 4 :
-            xbmc.executebuiltin( 'Skin.SetString(WeatherFanartDir,special://skin/extras/Weather-Fanart)')
+            xbmc.executebuiltin( 'Skin.SetString(WeatherFanartDir,special://skin/extras/Weather-Fanart/)')
         backgroundpackZip = os.path.join( ZIP_PATH, "%s.zip" % theme )
         # Extract theme zip...
         zip = zipfile.ZipFile (backgroundpackZip, "r")
