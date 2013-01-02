@@ -18,20 +18,37 @@ __cwd__          = __addon__.getAddonInfo('path').decode("utf-8")
 __language__     = __addon__.getLocalizedString
 
 SKIN_PATH = os.path.join( xbmc.translatePath("special://home/addons"), xbmc.getSkinDir() )
-#ZIP_PATH = os.path.join( SKIN_PATH, "extras", "themes" )
-ZIP_PATH = SKIN_PATH 
-SKIN_BG_PATH  = os.path.join( SKIN_PATH, "backgrounds" )
 
 def main() :
-
-    BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/"
   #  BACKGROUNDPACKS_REPO = None
+    global ZIP_PATH
+    global BACKGROUNDPACKS_REPO
+    global SKIN_BG_PATH
+    modeselect= []
+    modeselect.append( __language__(32008) )
+    modeselect.append( __language__(32009) )
+    dialogSelection = xbmcgui.Dialog()
+    index        = dialogSelection.select( __language__(32010), modeselect ) 
+    if index == -1 :
+        return
+    # Download more themes...
+    elif index == 0 :
+        BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/"
+        ZIP_PATH = SKIN_PATH
+        SKIN_BG_PATH  = os.path.join( SKIN_PATH, "backgrounds" )
+        themes = get_local_backgroundpacks()
+        themes.append( __language__(32001) )
+        # Install local theme...
+    else :
+        BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/themes/"
+        SKIN_BG_PATH  = os.path.join( SKIN_PATH, "media" )
+        ZIP_PATH = os.path.join( SKIN_PATH, "media" )
+        themes = get_local_backgroundpacks()
+        themes.append( __language__(32011) )
  #   if len(sys.argv) == 2 and sys.argv[ 1 ].startswith("http://") :
  #       BACKGROUNDPACKS_REPO = sys.argv[ 1 ]
     # Get a list of local themes...
-    themes = get_local_backgroundpacks()
     # Add entry to download more themes...
-    themes.append( __language__(32001) )
     # Dialog to select local theme or download more...
     dialogThemes = xbmcgui.Dialog()
     index        = dialogThemes.select( __language__(32002), themes ) 
@@ -101,15 +118,16 @@ def show_remote_themes( BACKGROUNDPACKS_REPO ) :
 def download_progress_hook( numblocks, blocksize, filesize, url=None, dp=None, ratio=1.0 ):
     downloadedsize  = numblocks * blocksize
     percent         = int( downloadedsize * 100 / filesize )
-    
     dp.update( percent )
 
 def install_local_backgroundpack( theme ) :
     try :
         # Init
      #   shutil.rmtree(SKIN_BG_PATH)
-        contents = [os.path.join(SKIN_BG_PATH, i) for i in os.listdir(SKIN_BG_PATH)]
-        [shutil.rmtree(i) if os.path.isdir(i) else os.unlink(i) for i in contents]
+        xbmcgui.Dialog().ok( __addonid__, "Install Theme")        
+        if SKIN_BG_PATH  != os.path.join( SKIN_PATH, "media" ) :
+            contents = [os.path.join(SKIN_BG_PATH, i) for i in os.listdir(SKIN_BG_PATH)]
+            [shutil.rmtree(i) if os.path.isdir(i) else os.unlink(i) for i in contents]
         backgroundpackZip = os.path.join( ZIP_PATH, "%s.zip" % theme )
         # Extract theme zip...
         zip = zipfile.ZipFile (backgroundpackZip, "r")
@@ -119,5 +137,5 @@ def install_local_backgroundpack( theme ) :
     except :
         # Message...
         xbmcgui.Dialog().ok( __addonid__, __language__(32004))
-                    
+                            
 main()
