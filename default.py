@@ -26,6 +26,9 @@ def main() :
     global DOWNLOAD_PATH
     global download_mode
     modeselect= []
+    if xbmc.getSkinDir() != "skin.aeon.nox" :
+        xbmcgui.Dialog().ok( __addonid__, "Skin not supported")        
+        return
     modeselect.append( __language__(32008) )
     modeselect.append( __language__(32009) )
     modeselect.append( __language__(32013) )
