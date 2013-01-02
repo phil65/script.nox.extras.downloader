@@ -70,7 +70,7 @@ def main() :
     elif download_mode == 4 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/weather-fanart/"
         SKIN_BG_PATH  = os.path.join( SKIN_PATH, "extras" )
-        ZIP_PATH = os.path.join( SKIN_PATH, "extras" )
+        ZIP_PATH = SKIN_PATH
         themes = get_local_backgroundpacks()
         themes.append( __language__(32017) )
     elif download_mode == 5 :
@@ -173,7 +173,7 @@ def install_local_backgroundpack( theme ) :
             [shutil.rmtree(i) if os.path.isdir(i) else os.unlink(i) for i in contents]
         if download_mode == 4 :
             xbmc.executebuiltin( 'Skin.SetString(WeatherFanartDir,special://skin/extras/Weather-Fanart/)')
-            contents = [os.path.join(SKIN_BG_PATH, "Weather-Fanart", i) for i in os.listdir(SKIN_BG_PATH)]
+            contents = [os.path.join(SKIN_BG_PATH, "Weather-Fanart", i) for i in os.listdir(os.path.join(SKIN_BG_PATH, "Weather-Fanart"))]
             [shutil.rmtree(i) if os.path.isdir(i) else os.unlink(i) for i in contents]
         backgroundpackZip = os.path.join( ZIP_PATH, "%s.zip" % theme )
         # Extract theme zip...
