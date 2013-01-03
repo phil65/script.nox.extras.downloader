@@ -37,6 +37,7 @@ def main() :
     modeselect.append( __language__(32019) )
     modeselect.append( __language__(32018) )
     modeselect.append( __language__(32024) )
+    modeselect.append( __language__(32027) )
     dialogSelection = xbmcgui.Dialog()
     download_mode        = dialogSelection.select( __language__(32010), modeselect ) 
     if download_mode == -1 :
@@ -107,10 +108,17 @@ def main() :
         ZIP_PATH = os.path.join( SKIN_PATH, "Mods" )
         themes = get_local_backgroundpacks()
         themes.append( __language__(32025) )
+    elif download_mode == 8 :
+        BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/Scripts/"
+        INSTALL_PATH  = xbmc.translatePath("special://home/addons")
+        if not os.path.exists(os.path.join( SKIN_PATH, "Scripts" )):
+            os.makedirs(os.path.join( SKIN_PATH, "Scripts" ))
+        ZIP_PATH = os.path.join( SKIN_PATH, "Scripts" )
+        themes = get_local_backgroundpacks()
+        themes.append( __language__(32026) )
+		
  #   if len(sys.argv) == 2 and sys.argv[ 1 ].startswith("http://") :
  #       BACKGROUNDPACKS_REPO = sys.argv[ 1 ]
-    # Get a list of local themes...
-    # Add entry to download more themes...
     # Dialog to select local theme or download more...
     dialogThemes = xbmcgui.Dialog()
     index        = dialogThemes.select( __language__(32002), themes ) 
@@ -123,7 +131,7 @@ def main() :
     # Install local theme...
     else :
         theme   = themes[ index ]
-        install_local_backgroundpack( theme )
+        install_local_zip( theme )
 
 def log(txt):
     if isinstance (txt,str):
@@ -174,15 +182,15 @@ def show_remote_themes( BACKGROUNDPACKS_REPO ) :
         urllib.urlretrieve( remote_theme, local_theme, lambda nb, bs, fs, url=remote_theme : download_progress_hook( nb, bs, fs, local_theme, dp ) )
         # Close progress dialog...
         dp.close()
-        # Install local theme...
-        install_local_backgroundpack( theme )
+        # Install local zip...
+        install_local_zip( theme )
 
 def download_progress_hook( numblocks, blocksize, filesize, url=None, dp=None, ratio=1.0 ):
     downloadedsize  = numblocks * blocksize
     percent         = int( downloadedsize * 100 / filesize )
     dp.update( percent )
 
-def install_local_backgroundpack( theme ) :
+def install_local_zip( theme ) :
     try :
         # Init
      #   shutil.rmtree(INSTALL_PATH)
@@ -193,9 +201,9 @@ def install_local_backgroundpack( theme ) :
             xbmc.executebuiltin( 'Skin.SetString(WeatherFanartDir,special://skin/extras/Weather-Fanart/)')
             contents = [os.path.join(INSTALL_PATH, "Weather-Fanart", i) for i in os.listdir(os.path.join(INSTALL_PATH, "Weather-Fanart"))]
             [shutil.rmtree(i) if os.path.isdir(i) else os.unlink(i) for i in contents]
-        backgroundpackZip = os.path.join( ZIP_PATH, "%s.zip" % theme )
+        DownloadedZip = os.path.join( ZIP_PATH, "%s.zip" % theme )
         # Extract theme zip...
-        zip = zipfile.ZipFile (backgroundpackZip, "r")
+        zip = zipfile.ZipFile (DownloadedZip, "r")
         zip.extractall(INSTALL_PATH, filter(lambda f: not f.endswith('/'), zip.namelist()))
         zip.close()   
         if download_mode == 7 :
