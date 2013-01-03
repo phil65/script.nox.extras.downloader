@@ -209,6 +209,8 @@ def install_local_zip( theme ) :
         if download_mode == 7 :
             xbmcgui.Dialog().ok( __addonid__, "Skin will reload now.")        
             xbmc.executebuiltin( 'XBMC.ReloadSkin()')
+        if download_mode == 8 :
+            xbmc.executebuiltin( 'XBMC.UpdateLocalAddons()')
         xbmcgui.Dialog().ok( __addonid__, __language__(32003))        
     except :
         # Message...
