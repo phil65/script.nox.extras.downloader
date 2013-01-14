@@ -49,57 +49,50 @@ def main() :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/backgrounds/"
         ZIP_PATH = os.path.join( ADDON_DATA_PATH, "backgroundpacks" )
         INSTALL_PATH  = os.path.join( SKIN_PATH, "backgrounds" )
-        themes = get_local_backgroundpacks()
-        themes.append( __language__(32001) )
+        DOWNLOAD_BUTTON =  __language__(32001)
         # Install local theme...
     elif download_mode == 1 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/themes/"
         INSTALL_PATH  = os.path.join( SKIN_PATH, "media" )
         ZIP_PATH = os.path.join( ADDON_DATA_PATH, "themes" )
-        themes = get_local_backgroundpacks()
-        themes.append( __language__(32011) )
+        DOWNLOAD_BUTTON =  __language__(32011)
     elif download_mode == 2 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/genreart/icons/"
         INSTALL_PATH  = os.path.join( SKIN_PATH, "extras", "genre", "video", "icons" )
         ZIP_PATH = os.path.join( ADDON_DATA_PATH, "videogenreicons" )
-        themes = get_local_backgroundpacks()
-        themes.append( __language__(32012) )
+        DOWNLOAD_BUTTON =  __language__(32012)
     elif download_mode == 3 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/genreart/fanart/"
         INSTALL_PATH  = os.path.join( SKIN_PATH, "extras", "genre", "video", "fanart" )
         ZIP_PATH = os.path.join( ADDON_DATA_PATH, "videogenrefanart" )
-        themes = get_local_backgroundpacks()
-        themes.append( __language__(32014) )
+        DOWNLOAD_BUTTON =  __language__(32014)
     elif download_mode == 4 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/weather-fanart/"
         INSTALL_PATH  = os.path.join( SKIN_PATH, "extras" )
         ZIP_PATH = os.path.join( ADDON_DATA_PATH, "weather-fanart" )
-        themes = get_local_backgroundpacks()
-        themes.append( __language__(32017) )
+        DOWNLOAD_BUTTON =  __language__(32017)
     elif download_mode == 5 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/Music/icons/"
         INSTALL_PATH  = os.path.join( SKIN_PATH, "extras", "genre", "music", "icons" )
         ZIP_PATH = os.path.join( ADDON_DATA_PATH, "musicgenreicons" )
-        themes = get_local_backgroundpacks()
-        themes.append( __language__(32020) )
+        DOWNLOAD_BUTTON =  __language__(32020)
     elif download_mode == 6 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/Music/fanart/"
         INSTALL_PATH  = os.path.join( SKIN_PATH, "extras", "genre", "music", "fanart" )
         ZIP_PATH = os.path.join( ADDON_DATA_PATH, "musicgenrefanart" )
-        themes = get_local_backgroundpacks()
-        themes.append( __language__(32021) )
+        DOWNLOAD_BUTTON =  __language__(32021)
     elif download_mode == 7 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/Mods/"
         INSTALL_PATH  = SKIN_PATH
         ZIP_PATH = os.path.join( ADDON_DATA_PATH, "Mods" )
-        themes = get_local_backgroundpacks()
-        themes.append( __language__(32025) )
+        DOWNLOAD_BUTTON =  __language__(32025)
     elif download_mode == 8 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/Scripts/"
         INSTALL_PATH  = xbmc.translatePath("special://home/addons")
         ZIP_PATH = os.path.join( ADDON_DATA_PATH, "Scripts" )
-        themes = get_local_backgroundpacks()
-        themes.append( __language__(32026) )
+        DOWNLOAD_BUTTON =  __language__(32026)
+    themes = get_local_backgroundpacks()
+    themes.append(DOWNLOAD_BUTTON)
     checkDir(ZIP_PATH)	
  #   if len(sys.argv) == 2 and sys.argv[ 1 ].startswith("http://") :
  #       BACKGROUNDPACKS_REPO = sys.argv[ 1 ]
