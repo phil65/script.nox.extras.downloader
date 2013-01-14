@@ -8,7 +8,7 @@ import re
 import fnmatch
 import zipfile
 import urllib
-import xbmc, xbmcgui, xbmcaddon
+import xbmc, xbmcgui, xbmcaddon, xbmcvfs
 import shutil
 
 __addon__        = xbmcaddon.Addon()
@@ -18,6 +18,7 @@ __cwd__          = __addon__.getAddonInfo('path').decode("utf-8")
 __language__     = __addon__.getLocalizedString
 
 SKIN_PATH = os.path.join( xbmc.translatePath("special://home/addons"), xbmc.getSkinDir() )
+ADDON_DATA_PATH = os.path.join( xbmc.translatePath("special://profile/addon_data/%s" % __addonid__ ).decode("utf-8") )
 
 def main() :
   #  BACKGROUNDPACKS_REPO = None
@@ -38,6 +39,7 @@ def main() :
     modeselect.append( __language__(32018) )
     modeselect.append( __language__(32024) )
     modeselect.append( __language__(32027) )
+    checkDir(os.path.join( ADDON_DATA_PATH))
     dialogSelection = xbmcgui.Dialog()
     download_mode        = dialogSelection.select( __language__(32010), modeselect ) 
     if download_mode == -1 :
@@ -45,9 +47,7 @@ def main() :
     # Download more themes...
     elif download_mode == 0 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/backgrounds/"
-        ZIP_PATH = os.path.join( SKIN_PATH, "backgroundpacks" )
-        if not os.path.exists(ZIP_PATH):
-            os.makedirs(ZIP_PATH)
+        ZIP_PATH = os.path.join( ADDON_DATA_PATH, "backgroundpacks" )
         INSTALL_PATH  = os.path.join( SKIN_PATH, "backgrounds" )
         themes = get_local_backgroundpacks()
         themes.append( __language__(32001) )
@@ -55,68 +55,52 @@ def main() :
     elif download_mode == 1 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/themes/"
         INSTALL_PATH  = os.path.join( SKIN_PATH, "media" )
-        ZIP_PATH = INSTALL_PATH
+        ZIP_PATH = os.path.join( ADDON_DATA_PATH, "themes" )
         themes = get_local_backgroundpacks()
         themes.append( __language__(32011) )
     elif download_mode == 2 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/genreart/icons/"
         INSTALL_PATH  = os.path.join( SKIN_PATH, "extras", "genre", "video", "icons" )
-        ZIP_PATH = INSTALL_PATH
-        if not os.path.exists(ZIP_PATH):
-            os.makedirs(ZIP_PATH)
+        ZIP_PATH = os.path.join( ADDON_DATA_PATH, "videogenreicons" )
         themes = get_local_backgroundpacks()
         themes.append( __language__(32012) )
     elif download_mode == 3 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/genreart/fanart/"
         INSTALL_PATH  = os.path.join( SKIN_PATH, "extras", "genre", "video", "fanart" )
-        ZIP_PATH = INSTALL_PATH
-        if not os.path.exists(ZIP_PATH):
-            os.makedirs(ZIP_PATH)
+        ZIP_PATH = os.path.join( ADDON_DATA_PATH, "videogenrefanart" )
         themes = get_local_backgroundpacks()
         themes.append( __language__(32014) )
     elif download_mode == 4 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/weather-fanart/"
         INSTALL_PATH  = os.path.join( SKIN_PATH, "extras" )
-        ZIP_PATH = os.path.join( SKIN_PATH, "extras", "Weatherpacks" )
-        if not os.path.exists(ZIP_PATH):
-            os.makedirs(ZIP_PATH)
-        if not os.path.exists(os.path.join( SKIN_PATH, "extras", "Weather-Fanart" )):
-            os.makedirs(os.path.join( SKIN_PATH, "extras", "Weather-Fanart" ))
+        ZIP_PATH = os.path.join( ADDON_DATA_PATH, "weather-fanart" )
         themes = get_local_backgroundpacks()
         themes.append( __language__(32017) )
     elif download_mode == 5 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/Music/icons/"
         INSTALL_PATH  = os.path.join( SKIN_PATH, "extras", "genre", "music", "icons" )
-        ZIP_PATH = INSTALL_PATH
-        if not os.path.exists(ZIP_PATH):
-            os.makedirs(ZIP_PATH)
+        ZIP_PATH = os.path.join( ADDON_DATA_PATH, "musicgenreicons" )
         themes = get_local_backgroundpacks()
         themes.append( __language__(32020) )
     elif download_mode == 6 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/Music/fanart/"
         INSTALL_PATH  = os.path.join( SKIN_PATH, "extras", "genre", "music", "fanart" )
-        ZIP_PATH = INSTALL_PATH
-        if not os.path.exists(ZIP_PATH):
-            os.makedirs(ZIP_PATH)
+        ZIP_PATH = os.path.join( ADDON_DATA_PATH, "musicgenrefanart" )
         themes = get_local_backgroundpacks()
         themes.append( __language__(32021) )
     elif download_mode == 7 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/Mods/"
         INSTALL_PATH  = SKIN_PATH
-        if not os.path.exists(os.path.join( SKIN_PATH, "Mods" )):
-            os.makedirs(os.path.join( SKIN_PATH, "Mods" ))
-        ZIP_PATH = os.path.join( SKIN_PATH, "Mods" )
+        ZIP_PATH = os.path.join( ADDON_DATA_PATH, "Mods" )
         themes = get_local_backgroundpacks()
         themes.append( __language__(32025) )
     elif download_mode == 8 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/Scripts/"
         INSTALL_PATH  = xbmc.translatePath("special://home/addons")
-        if not os.path.exists(os.path.join( SKIN_PATH, "Scripts" )):
-            os.makedirs(os.path.join( SKIN_PATH, "Scripts" ))
-        ZIP_PATH = os.path.join( SKIN_PATH, "Scripts" )
+        ZIP_PATH = os.path.join( ADDON_DATA_PATH, "Scripts" )
         themes = get_local_backgroundpacks()
         themes.append( __language__(32026) )
-		
+    checkDir(ZIP_PATH)	
  #   if len(sys.argv) == 2 and sys.argv[ 1 ].startswith("http://") :
  #       BACKGROUNDPACKS_REPO = sys.argv[ 1 ]
     # Dialog to select local theme or download more...
@@ -138,7 +122,11 @@ def log(txt):
         txt = txt.decode("utf-8")
     message = u'%s: %s' % (__addonid__, txt)
     xbmc.log(msg=message.encode("utf-8"), level=xbmc.LOGDEBUG)
-    
+ 
+def checkDir(path):
+    if not xbmcvfs.exists(path):
+        xbmcvfs.mkdir(path)
+        
 def get_local_backgroundpacks( ) :
     # Get a list of extra themes (local)      
     themes = []
