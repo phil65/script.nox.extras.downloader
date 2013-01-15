@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.nox.extras.downloader" name="Nox Extras Downloader" version="0.0.4" provider-name="phil65">
+<addon id="script.nox.extras.downloader" name="Nox Extras Downloader" version="0.0.5" provider-name="phil65">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0"/>
         <import addon="xbmc.addon"                  version="12.0.0"/>
