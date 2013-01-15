@@ -71,6 +71,7 @@ def main() :
         INSTALL_PATH  = os.path.join( SKIN_PATH, "extras" )
         ZIP_PATH = os.path.join( ADDON_DATA_PATH, "weather-fanart" )
         DOWNLOAD_BUTTON =  __language__(32017)
+        checkDir(os.path.join(INSTALL_PATH, "Weather-Fanart"))
     elif download_mode == 5 :
         BACKGROUNDPACKS_REPO = "http://aeon-nox-background-packs.googlecode.com/svn/trunk/Music/icons/"
         INSTALL_PATH  = os.path.join( SKIN_PATH, "extras", "genre", "music", "icons" )
